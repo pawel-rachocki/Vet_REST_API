@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\build\Vet-REST-API.props" />
+</Project>

@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using Vet_REST_API.Models;
+using Vet_REST_API.Models.DTOs;
 
 namespace Vet_REST_API.Controllers;
 
@@ -118,7 +119,7 @@ public class AnimalsController : ControllerBase
     
     //POST /api/animals/{animalId}/visits
     [HttpPost("{animalId:int}/visits")]
-    public ActionResult<Visit> AddVisitForAnimal(int animalId, [FromBody] Visit visit)
+    public ActionResult<Visit> AddVisitForAnimal(int animalId, [FromBody] VisitDto visit)
     {
         var animal = Database.GetAnimals().FirstOrDefault(x => x.Id == animalId);
 

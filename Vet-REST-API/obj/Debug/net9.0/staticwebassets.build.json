@@ -1,0 +1,12 @@
+{
+  "Version": 1,
+  "Hash": "ToPERuu2yyp0mfrdPukoSzw7q2EyH96WVbIaRSGf4C4=",
+  "Source": "Vet-REST-API",
+  "BasePath": "_content/Vet-REST-API",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": [],
+  "Endpoints": []
+}
