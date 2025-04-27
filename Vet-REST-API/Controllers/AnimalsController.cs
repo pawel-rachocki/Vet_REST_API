@@ -45,6 +45,24 @@ public class AnimalsController : ControllerBase
         return Created($"api/animals/{animal.Id}", newAnimal);
     }
     
-    // PUT
+    // PUT /api/animals/{id}
+
+    [HttpPut("{id:int}")]
+    public ActionResult<Animal> UpdateAnimal(int id, Animal animal)
+    {
+        var animalToUpdate = Database.GetAnimals().FirstOrDefault(x => x.Id == id);
+
+        if (animalToUpdate == null)
+        {
+            return NotFound("Animal with given id does not exist");
+        }
+        
+        animalToUpdate.Name = animal.Name;
+        animalToUpdate.Category = animal.Category;
+        animalToUpdate.Weight = animal.Weight;
+        animalToUpdate.CoatColor = animal.CoatColor;
+        
+        return NoContent();
+    }
 
 }
