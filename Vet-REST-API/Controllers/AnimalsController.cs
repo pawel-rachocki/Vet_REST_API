@@ -81,4 +81,21 @@ public class AnimalsController : ControllerBase
         
     }
 
+    // GET /api/animals/search?name=imię
+    [HttpGet("search")]
+    public ActionResult<IEnumerable<Animal>> SearchAnimals([FromQuery] string search)
+    {
+        if (string.IsNullOrEmpty(search))
+        {
+            return BadRequest("Search string cannot be null or empty");
+        }
+        var animals = Database.GetAnimals().Where(x => x.Name !=null && x.Name.Contains(search, StringComparison.OrdinalIgnoreCase)).ToList();
+
+        if (animals.Count == 0)
+        {
+            return NotFound("No animal with that name exists");
+        }
+        return Ok(animals);
+    }
+
 }
