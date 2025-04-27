@@ -115,5 +115,33 @@ public class AnimalsController : ControllerBase
             .ToList();
         return Ok(visits);
     }
+    
+    //POST /api/animals/{animalId}/visits
+    [HttpPost("{animalId:int}/visits")]
+    public ActionResult<Visit> AddVisitForAnimal(int animalId, [FromBody] Visit visit)
+    {
+        var animal = Database.GetAnimals().FirstOrDefault(x => x.Id == animalId);
+
+        if (animal == null)
+        {
+            return NotFound("Animal with given id does not exist");
+        }
+        
+        var newVisitId = Database.GetVisits().Any() ? Database.GetVisits().Max(x => x.Id) + 1 : 1;
+
+        var newVisit = new Visit
+        {
+            Id = newVisitId,
+            Animal = animal,
+            Date = visit.Date,
+            Description = visit.Description,
+            Price = visit.Price,
+        };
+        Database.AddVisit(newVisit);
+        return Created(
+            $"api/animals/{animalId}/visits/{newVisit.Id}",
+            newVisit
+        );
+    }
 
 }
