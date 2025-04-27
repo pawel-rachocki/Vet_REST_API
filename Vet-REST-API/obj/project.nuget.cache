@@ -1,0 +1,11 @@
+{
+  "version": 2,
+  "dgSpecHash": "gm48hvd/o+c=",
+  "success": true,
+  "projectFilePath": "D:\\dev\\C#\\RiderProjects\\Vet-REST-API\\Vet-REST-API\\Vet-REST-API.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Pawel\\.nuget\\packages\\microsoft.aspnetcore.openapi\\9.0.3\\microsoft.aspnetcore.openapi.9.0.3.nupkg.sha512",
+    "C:\\Users\\Pawel\\.nuget\\packages\\microsoft.openapi\\1.6.17\\microsoft.openapi.1.6.17.nupkg.sha512"
+  ],
+  "logs": []
+}
