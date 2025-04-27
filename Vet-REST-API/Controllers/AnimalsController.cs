@@ -7,7 +7,7 @@ namespace Vet_REST_API.Controllers;
 [Route("api/[controller]")]
 public class AnimalsController : ControllerBase
 {
-    //Get all Animals
+    // Get all Animals
     [HttpGet]
     public ActionResult<IEnumerable<Animal>> GetAnimals()
     {
@@ -15,7 +15,7 @@ public class AnimalsController : ControllerBase
         return Ok(animals);
     }
 
-    //Get Animal by id
+    // Get Animal by id
     [HttpGet("{id:int}")]
     public ActionResult<Animal> GetAnimal(int id)
     {
@@ -26,5 +26,25 @@ public class AnimalsController : ControllerBase
         }
         return Ok(animal);
     }
+    
+    // Add new Animal
+    [HttpPost]
+    public ActionResult<Animal> AddAnimal(Animal animal)
+    {
+        var newId = Database.GetAnimals().Any() ? Database.GetAnimals().Max(x => x.Id) + 1 : 1;
+        var newAnimal = new Animal
+        {
+            Id = newId,
+            Name = animal.Name,
+            Weight = animal.Weight,
+            CoatColor = animal.CoatColor,
+            Category = animal.Category,
+        };
+        Database.AddAnimal(newAnimal);
+        
+        return Created($"api/animals/{animal.Id}", newAnimal);
+    }
+    
+    // PUT
 
 }
