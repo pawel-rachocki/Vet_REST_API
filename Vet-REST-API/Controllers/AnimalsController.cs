@@ -97,5 +97,23 @@ public class AnimalsController : ControllerBase
         }
         return Ok(animals);
     }
+    
+    //VISITS
+    
+    // GET /api/animals/{animalId}/visits
+    [HttpGet("{animalId:int}/visits")]
+    public ActionResult<IEnumerable<Visit>> GetAnimalsVisits(int animalId)
+    {
+        var animal = Database.GetAnimals().FirstOrDefault(x => x.Id == animalId);
+        if (animal == null)
+        {
+            return NotFound("Animal with given id does not exist");
+        }
+        
+        var visits = Database.GetVisits()
+            .Where(v => v.Animal != null && v.Animal.Id == animalId)
+            .ToList();
+        return Ok(visits);
+    }
 
 }
