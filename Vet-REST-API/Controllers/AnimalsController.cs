@@ -46,7 +46,6 @@ public class AnimalsController : ControllerBase
     }
     
     // PUT /api/animals/{id}
-
     [HttpPut("{id:int}")]
     public ActionResult<Animal> UpdateAnimal(int id, Animal animal)
     {
@@ -63,6 +62,23 @@ public class AnimalsController : ControllerBase
         animalToUpdate.CoatColor = animal.CoatColor;
         
         return NoContent();
+    }
+    
+    // DELETE /api/animals/{id}
+    [HttpDelete("{id:int}")]
+    public ActionResult<Animal> DeleteAnimal(int id)
+    {
+        var animalToDelete = Database.GetAnimals().FirstOrDefault(x => x.Id == id);
+
+        if (animalToDelete == null)
+        {
+            return NotFound("Animal with given id does not exist");
+        }
+        
+        Database.RemoveAnimal(animalToDelete);
+        
+        return NoContent();
+        
     }
 
 }
